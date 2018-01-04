@@ -29,26 +29,29 @@
         imgEl.onerror = function () {
             // when image loading failed
             imgEl.classList.add('hidden');
+            // added default image => when error
+         var defaultImage = document.createElement('img');
+         defaultImage.src = 'images/default.jpeg';
+         $images.appendChild(defaultImage);
         };
         $images.appendChild(imgEl);
     };
-
-    // choose from inputs
-    function execute() {
-        var limit = Number($countImages.value);
-        var category = $kindImages.value;
-        var format = $imageFormatControl.value;
-        $images.innerHTML = '';
-        if (!category && !limit && !format) {
-            getImages();
-        } else {
-            getImages({
-                category: category,
-                limit: limit,
-                format: format
-            })
+        // choose from inputs
+        function execute() {
+            var limit = Number($countImages.value);
+            var category = $kindImages.value;
+            var format = $imageFormatControl.value;
+            $images.innerHTML = '';
+            if (!category && !limit && !format) {
+                getImages();
+            } else {
+                getImages({
+                    category: category,
+                    limit: limit,
+                    format: format
+                })
+            }
         }
-    }
 
     function getImages(params){
         params = params || {};
