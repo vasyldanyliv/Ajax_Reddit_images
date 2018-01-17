@@ -1,20 +1,25 @@
-(function() {
     var $images = document.getElementById('images');
     var $button = document.getElementById('button');
     var $countImages = document.querySelector('.count-images');
     var $kindImages = document.querySelector('.kind-images');
     var $imageFormatControl = document.querySelector('.image-format-control');
+    var $loader = document.getElementById('loading');
 
     var init = function () {
         $button
             .addEventListener('click', execute);
     };
+    init();
 
     var get = function (url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
         xhr.onreadystatechange = function () {
-            if (xhr.readyState !== xhr.DONE) return;
+           if (xhr.readyState !== xhr.DONE)
+            return;
+           // added load-spinner when are requesting
+            $loader.classList.remove('show');
+            $loader.classList.add('hidden');
             var status = xhr.status;
             var headers = xhr.getAllResponseHeaders();
             var text = xhr.responseText;
@@ -41,6 +46,7 @@
             var limit = Number($countImages.value);
             var category = $kindImages.value;
             var format = $imageFormatControl.value;
+            $loader.classList.add('show');
             $images.innerHTML = '';
             if (!category && !limit && !format) {
                 getImages();
@@ -80,5 +86,4 @@
         });
     };
 
-    init();
-})();
+

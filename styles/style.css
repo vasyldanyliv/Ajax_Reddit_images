@@ -72,9 +72,19 @@ label, div{
     max-width:420px;
 }
 
-.hidden{
-    display: none;
+#loading{
+    margin:auto;
+    background: grey;
+    height:90px;
+    width:90px;
 }
 
+.hidden{
+    display:none;
+}
+
+.show{
+    display:inherit;
+}
 
 
